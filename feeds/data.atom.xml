@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Plural of Anecdote</title><link href="http://www.nervechannel.com/" rel="alternate"></link><link href="http://www.nervechannel.com/feeds/data.atom.xml" rel="self"></link><id>http://www.nervechannel.com/</id><updated>2014-06-16T00:00:00+01:00</updated><entry><title>The unwisdom of the crowd: marketing, metrics &amp; machine learning</title><link href="http://www.nervechannel.com/data/UnwisdomOfTheCrowd.html" rel="alternate"></link><updated>2014-06-16T00:00:00+01:00</updated><author><name>Andrew Clegg</name></author><id>tag:www.nervechannel.com,2014-06-16:data/UnwisdomOfTheCrowd.html</id><summary type="html">&lt;h4&gt;Or, why Google Analytics is not a good analytics&amp;nbsp;tool.&lt;/h4&gt;
+&lt;p&gt;&lt;em&gt;This is a slightly modified repost of an article I wrote for an internal Pearson blog recently. My colleague &lt;a href="https://twitter.com/tendayiviki"&gt;Tendayi&lt;/a&gt; encouraged me to post it here, so it could reach a wider&amp;nbsp;audience.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Vanity metrics&amp;#8221; is a phrase I&amp;#8217;ve heard cropping up a few times recently, in the context of growth engineering, the lean startup movement, and discussions around product lifecycles. It&amp;#8217;s hard to find any agreement on what metrics are vanity metrics, but in general it seems to refer to metrics that product owners measure and report in order to boast about growth, but which don&amp;#8217;t themselves prove anything about value or guide decision-making. Numbers of logins, of resources viewed, of content items downloaded, or of messages sent &amp;mdash; these might be considered vanity metrics, depending on the product. This seemed a bit strange to me, because in my world, all these metrics are extremely&amp;nbsp;valuable.&lt;/p&gt;
+&lt;p&gt;Suddenly it occurred to me this morning: when product and marketing experts talk about these metrics, they&amp;#8217;re almost always referring to &lt;em&gt;aggregates&lt;/em&gt; &amp;mdash; counts or averages across all users, or specific predefined segments. But when data scientists talk about them, we&amp;#8217;re often talking about &lt;em&gt;individual users&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;So why would I want to record and measure login counts or download counts for individual users? Or in the education domain, where I work: why count learning resources viewed, time taken on tasks, etc.? Well, all of these things are essential components of a user profile, and without a good user profile, you can&amp;#8217;t do things&amp;nbsp;like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Predict&lt;/strong&gt; which users will suffer poor educational outcomes&lt;ul&gt;
+&lt;li&gt;Contact those with poor predicted outcomes, to offer them more&amp;nbsp;support&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Recommend&lt;/strong&gt; content to users&lt;ul&gt;
+&lt;li&gt;Educational tasks that are likely to improve their assessment&amp;nbsp;scores&lt;/li&gt;
+&lt;li&gt;Purchases they&amp;#8217;re likely to&amp;nbsp;make&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Score&lt;/strong&gt; users for loyalty&lt;ul&gt;
+&lt;li&gt;Target low-scoring users in order to reduce&amp;nbsp;churn&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Estimate&lt;/strong&gt; the probability of a given user responding to an offer&lt;ul&gt;
+&lt;li&gt;Tailor offers to specific users in order to lift acceptance rate or overall&amp;nbsp;revenue&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; negative trends in the behaviour of certain users&lt;ul&gt;
+&lt;li&gt;Substandard educational&amp;nbsp;outcomes&lt;/li&gt;
+&lt;li&gt;Failure to renew&amp;nbsp;subscriptions&lt;/li&gt;
+&lt;li&gt;Low click-through rate on&amp;nbsp;recommendations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;#8230; and so&amp;nbsp;on.&lt;/p&gt;
+&lt;p&gt;Some of these examples are specific to our area of business, and I&amp;#8217;m sure you have similar domain-specific challenges, but others apply across the commercial web. And all of them need activity data down to the level of individual users. Something that may seem like a &amp;#8220;vanity metric&amp;#8221; when reported across all users &amp;mdash; number of logins per week, for example &amp;mdash; can be a very important indicator of an &lt;em&gt;individual&lt;/em&gt; user&amp;#8217;s engagement, when it&amp;#8217;s fed into a machine learning model for risk&amp;nbsp;scoring.&lt;/p&gt;
+&lt;p&gt;At the top of this article I mentioned Google Analytics. I don&amp;#8217;t want to pick on &lt;span class="caps"&gt;GA&lt;/span&gt; specifically, as this is common across web analytics tools in general, but I sometimes hear product owners saying &amp;#8220;we don&amp;#8217;t need a way to record user activity, we have Google Analytics already.&amp;#8221; But this misses the point that &lt;span class="caps"&gt;GA&lt;/span&gt; is designed to report aggregates across all your users, or across segments that you&amp;#8217;ve defined in advance. Unless it&amp;#8217;s changed considerably since I last used it, &lt;span class="caps"&gt;GA&lt;/span&gt; makes it very hard or impossible to report these metrics for individual users, or for &lt;em&gt;retrospectively-defined&lt;/em&gt; groups of users that are interesting because of some shared (usually negative) behaviour. And it also makes it hard or impossible to connect the activity of individual users with other elements of a user profile, such as demographic information, educational records, purchase history and so&amp;nbsp;on.&lt;/p&gt;
+&lt;p&gt;So please take the term &amp;#8220;vanity metrics&amp;#8221; with a pinch of salt. A particular &lt;span class="caps"&gt;KPI&lt;/span&gt; may be worth very little when reported at the level of your entire user base, but it might be the differentiator between a loyal customer or satisfied learner, a borderline case who needs help and support right now, or a lost&amp;nbsp;cause.&lt;/p&gt;</summary><category term="analytics"></category><category term="data science"></category><category term="product development"></category><category term="marketing"></category></entry><entry><title>Lyric clouds, genre maps and distinctive words</title><link href="http://www.nervechannel.com/data/LyricClouds.html" rel="alternate"></link><updated>2014-06-04T00:00:00+01:00</updated><author><name>Andrew Clegg</name></author><id>tag:www.nervechannel.com,2014-06-04:data/LyricClouds.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This is a repost of an &lt;a href="http://blog.last.fm/2011/06/22/lyric-clouds-genre-maps-and-distinctive-words"&gt;article&lt;/a&gt; I wrote for the Last.fm blog while working there in 2011. The images disappeared from Last.fm so I&amp;#8217;m serving them out of the wonderful &lt;a href="http://web.archive.org"&gt;Internet Archive&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;One of the interesting things that sets even superficially similiar genres of music apart is their lyrical content. Last.fm tags can overlap to a great degree, but we were interested to see what the words can tell you about the subtler shades of meaning that go along with those tags. As usual around here, the best way to answer questions like these is by asking the&amp;nbsp;data.&lt;/p&gt;
+&lt;p&gt;So I downloaded the &lt;a href="http://labrosa.ee.columbia.edu/millionsong/musixmatch"&gt;musiXmatch dataset&lt;/a&gt;, a collection of lyric tables for nearly 240,000 songs from all around the world (and the musical universe). They are tables in the sense that they don&amp;#8217;t contain the intact lyrics of each song, but rather a list of words present in each song, along with the number of times that word occurs. No use for karaoke, but perfect for investigating the overall properties of a genre. I then matched up the songs in the dataset with tracks in our own catalogue, and correlated this with Last.fm tag data, in order to count the number of times a given word appeared in each of several prominent&amp;nbsp;genres.&lt;/p&gt;
+&lt;h4&gt;Lyric&amp;nbsp;clouds&lt;/h4&gt;
+&lt;p&gt;Of course, lists of words and frequencies are a little dry, but thankfully &lt;span class="caps"&gt;IBM&lt;/span&gt; have released a &lt;a href="http://www.alphaworks.ibm.com/tech/wordcloud"&gt;Word-Cloud Generator&lt;/a&gt; which can take a weighted list of words and display it graphically, as seen on the &lt;a href="http://www.wordle.net/"&gt;Wordle&lt;/a&gt; website. The more often a word appears, the bigger it will be rendered. Here&amp;#8217;s what it came up with for the genres I tried — the software did the layout, but you can blame me for the font&amp;nbsp;selection.&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;table&gt;
+    &lt;tbody&gt;&lt;tr&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;i&gt;Click to open full images in a new window.&lt;br&gt;&lt;br&gt;
+                &lt;b&gt;Warning: they contain lyrics you may find offensive. Not safe for work.&lt;/b&gt;&lt;/i&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/blues.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/blues_thumb.png"&gt;&lt;br&gt;
+Blues
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/country.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/country_thumb.png"&gt;&lt;br&gt;
+Country
+            &lt;/a&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td colspan="3"&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/electronic.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/electronic_thumb.png"&gt;&lt;br&gt;
+Electronic
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/folk.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/folk_thumb.png"&gt;&lt;br&gt;
+Folk
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/goth.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/goth_thumb.png"&gt;&lt;br&gt;
+Goth
+            &lt;/a&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td colspan="3"&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/hip-hop.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/hip-hop_thumb.png"&gt;&lt;br&gt;
+Hip-hop
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/indie.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/indie_thumb.png"&gt;&lt;br&gt;
+Indie
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/metal.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/metal_thumb.png"&gt;&lt;br&gt;
+Metal
+            &lt;/a&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td colspan="3"&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/rap.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/rap_thumb.png"&gt;&lt;br&gt;
+Rap
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/rock.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/rock_thumb.png"&gt;&lt;br&gt;
+Rock
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/soul.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/soul_thumb.png"&gt;&lt;br&gt;
+Soul
+            &lt;/a&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;I did a bit of pre-processing to remove common &amp;#8216;stopwords&amp;#8217; that don&amp;#8217;t really hold any information about the topics of the lyrics (and, for, I, you, the, plus many more), but this only took into account English words — and if you look closely, you&amp;#8217;ll see a few common words from German, French and Spanish (and probably others) that are from foreign-language songs in the dataset. But what&amp;#8217;s most striking for me about these is not how much they differ, but in fact how often some of the words appear prominently across genres. Almost everyone sings about love, for example, with the exception of Rap and Hip-Hop, and time comes up… time and time&amp;nbsp;again.&lt;/p&gt;
+&lt;h4&gt;Genre&amp;nbsp;maps&lt;/h4&gt;
+&lt;p&gt;A limitation of word clouds is that while they&amp;#8217;re great for showing the comparative popularity of words within a genre, they&amp;#8217;re not so good for looking at the overall similarities or differences of several genres at once. To do that, you need some measure of similarity which can be rendered graphically as a kind of &amp;#8216;genre neighbourhood map&amp;#8217;. So I measured the similarities between the word lists for each genre, ranked by popularity, using &lt;a href="http://blog.codalism.com/?p=1317"&gt;a method&lt;/a&gt; which was developed to compare the result rankings from different search engines. This gives a single value for how similar the lyric choices are between each pair of genres, where differences towards the top of the lists (the most popular words) are considered more important than differences further down. A bit of &lt;a href="http://www.statmethods.net/advstats/mds.html"&gt;extra number crunching&lt;/a&gt; in &lt;a href="http://www.r-project.org/"&gt;R&lt;/a&gt; can convert these similarity scores into a 2D map, which I imported into &lt;a href="http://www.openoffice.org/"&gt;OpenOffice&lt;/a&gt; to&amp;nbsp;render:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/lyric_map.png" target="wordle"&gt;&lt;br&gt;
+&lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/lyric_map_small.png"&gt;&lt;br&gt;
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Click image to open larger version in a new&amp;nbsp;window.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This map is really interesting for its combination of expected and unexpected neighbours, and also for the way it clearly shows Rap and Hip-Hop as outliers from the main axis on the left. Goth and Metal, which may appear similar to the un-trained ear (and eye!), are considerably separated, while Metal and Folk are — surprisingly — much closer. Electronic (a very broad tag) is clustered together with Soul and Blues, presumably because of the soulful origins of house music, which is one of the more lyrical electronic sub-genres. And Rap and Hip-Hop, which might be considered synonymous by the layman, are about as different as Indie and Country in terms of lyric&amp;nbsp;ranking.&lt;/p&gt;
+&lt;h4&gt;Distinctive&amp;nbsp;words&lt;/h4&gt;
+&lt;p&gt;The word clouds as shown draw the viewer&amp;#8217;s attention to the very frequent words, but these also tend to be the ones like love and time which are popular across genres. This is a problem if you want to find out which words are most distinctive or characteristic of a given genre — the words which, if used as search terms for example, would be best at selecting songs from that genre correctly (true positives), while minimizing the number of songs retrieved from other genres (false positives). Once again, information retrieval (the science behind search engines) can help us — the F measure or &lt;a href="http://en.wikipedia.org/wiki/F-score"&gt;F score&lt;/a&gt; is specifically designed for measuring the tradeoff between true positives and false positives in a set of results. It&amp;#8217;s a score between 0 and 1, where 0 means &amp;#8220;no relevant documents retrieved&amp;#8221;, but 1 means &amp;#8220;all relevant documents retrieved&amp;#8221; and &amp;#8220;no additional spurious documents&amp;nbsp;retrieved&amp;#8221;.&lt;/p&gt;
+&lt;p&gt;So I calculated the F score that each word would have as a search term for each genre in some notional lyric-based search engine: &amp;#8220;how relevant would the results be if I searched for Indie tracks with the search term friend&amp;#8221; for example. This doesn&amp;#8217;t take into account the number of times each word occurs within a song, just the fact that it occurs at all, but it does let us redraw the lyric clouds with each word&amp;#8217;s size determined by its F score for that genre. As you can see, this brings out the words that are characteristic of each genre, rather than emphasizing those that are globally&amp;nbsp;popular:&lt;/p&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;table&gt;
+    &lt;tbody&gt;&lt;tr&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;i&gt;Click to open full images in a new window.&lt;br&gt;&lt;br&gt;
+                &lt;b&gt;Warning: they contain lyrics you may find offensive. Not safe for work.&lt;/b&gt;&lt;/i&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/blues.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/blues_thumb.png"&gt;&lt;br&gt;
+Blues
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/country.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/country_thumb.png"&gt;&lt;br&gt;
+Country
+            &lt;/a&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td colspan="3"&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/electronic.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/electronic_thumb.png"&gt;&lt;br&gt;
+Electronic
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/folk.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/folk_thumb.png"&gt;&lt;br&gt;
+Folk
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/goth.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/goth_thumb.png"&gt;&lt;br&gt;
+Goth
+            &lt;/a&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td colspan="3"&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/hip-hop.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/hip-hop_thumb.png"&gt;&lt;br&gt;
+Hip-hop
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/indie.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/indie_thumb.png"&gt;&lt;br&gt;
+Indie
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/metal.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/metal_thumb.png"&gt;&lt;br&gt;
+Metal
+            &lt;/a&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td colspan="3"&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/rap.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/rap_thumb.png"&gt;&lt;br&gt;
+Rap
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/rock.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/rock_thumb.png"&gt;&lt;br&gt;
+Rock
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td align="center" valign="middle" width="200"&gt;
+            &lt;a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/soul.png" target="wordle"&gt;
+                &lt;img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/soul_thumb.png"&gt;&lt;br&gt;
+Soul
+            &lt;/a&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;I think they bring out the unique character of each genre much more effectively, and the variation in size between the words is much less, so the less prominent words are easier to see. There are some interesting quirks visible too. For example, many German words are much more clearly visible in the Goth cloud than they were before, reflecting both the comparatively large number of songs in German in that genre, and the lack of German lyrics in most other genres. Country for example is entirely&amp;nbsp;English.&lt;/p&gt;
+&lt;p&gt;Finally, a little extra present from the data. The word with the highest F score in the whole dataset is Christmas, with an F score of 0.3892 for the tag… Christmas. So, unseasonal greetings from the data crunchers here at Last.&lt;span class="caps"&gt;HQ&lt;/span&gt;!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Thanks to &lt;a href="http://musixmatch.com/"&gt;musiXmatch&lt;/a&gt; for making the lyric database available, and &lt;a href="http://www.columbia.edu/~tb2332/"&gt;Thierry Bertin-Mahieux&lt;/a&gt; for helping me to reconstruct the full words from the stems in the&amp;nbsp;database.&lt;/em&gt;&lt;/p&gt;</summary><category term="music"></category><category term="lyrics"></category><category term="lastfm"></category><category term="IR"></category><category term="visualization"></category></entry></feed>

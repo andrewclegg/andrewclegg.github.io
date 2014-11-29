@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet/less" type="text/css" href="../theme/css/style.less">
+  <script src="../theme/js/less-1.3.3.min.js" type="text/javascript"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="../theme/css/style.css"> -->
+
+  <link rel="stylesheet" type="text/css" href="../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Andrew Clegg">
+  <meta name="description" content="Posts and writings by Andrew Clegg">
+
+  <link href="http://www.nervechannel.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Plural of Anecdote Full Atom Feed" />
+
+<meta name="keywords" content="snake charmer, vagrant, salt, virtualbox, virtualization, python">
+
+  <title>
+Snake Charmer: the all-in-one data science toolbox for Python&nbsp;3  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="..">
+        <img src="/theme/images/logo.jpg" alt="logo">
+      </a>
+      <h2><a href="..">Andrew Clegg</a></h2>
+      <p>The Plural of Anecdote</p>
+      <ul>
+        <li><a href="../About.html">About</a></li>
+        <li><a href="../Publications.html">Publications</a></li>
+        <li><a href="../Talks.html">Talks and&nbsp;workshops</a></li>
+        <li><a href="/">Blog</a></li>
+        <li><a href="https://github.com/andrewclegg/snake-charmer">Snake Charmer</a></li>
+        <li><a href="https://github.com/andrewclegg">GitHub</a></li>
+        <li><a href="https://twitter.com/andrew_clegg">Twitter</a></li>
+        <li><a href="https://www.linkedin.com/in/andrewcleggdatascientist">LinkedIn</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+<p>Posted on Wed 04 June 2014</p>
+    </header>
+
+<article>
+  <div id="article_title">
+    <h3><a href="../tech/SnakeCharmerIntro.html">Snake Charmer: the all-in-one data science toolbox for Python&nbsp;3</a></h3>
+  </div>
+  <div id="article_text">
+    <p>Python&#8217;s an amazing language, but it&#8217;s constantly let down by its packaging and distribution infrastructure. Apologies to those people who&#8217;ve worked hard to fix this, but it sucks. I&#8217;ve wasted days in the past getting a particular set of packages to cooperate on a particular machine, only to find that the resulting combination of library files, symlinks, chicken blood and chanting doesn&#8217;t work on any <em>other</em>&nbsp;machines.</p>
+<p>The <a href="http://virtualenv.readthedocs.org/en/latest/">virtualenv</a> tool helps a bit, by letting you have entirely separate Pythons, different versions if necessary, with their own sandboxed libraries and tools. But not all packages behave well in virtualenvs. Some are just sloppily written, but others have very specific dependencies on libraries supplied by your operating system or compiler toolchain, which may be written in C or Fortran or Ancient Enochian, and can&#8217;t easily be localized to a virtualenv. Some even have specific hardware requirements, or platform-specific behavioural&nbsp;quirks.</p>
+<p>This is particularly true in scientific and statistical computing, where some of the most popular Python tools make use of low-level libraries for linear algebra or parallel computing, and others rely on <span class="caps">OS</span>-dependent features for image rendering or interprocess communication. And behavioural differences and incompatibilities can be particularly pernicious &mdash; maybe your code will run without any errors, but quietly produce <a href="https://github.com/statsmodels/statsmodels/issues/1690">slightly inaccurate predictions</a>.</p>
+<h4>Meanwhile, in&nbsp;Shoreditch&#8230;</h4>
+<p>Thankfully, there&#8217;s a solution to many of these problems, if we borrow an idea from our much hipper web developer friends. These days it&#8217;s quite common to build standardized, pre-packaged virtual machines (VMs) for developers to work in, meaning your code has the same runtime environment as all your teammates&#8217; code does, and this closely resembles the servers you will eventually deploy to. By running a little server inside each developer&#8217;s laptop or desktop, with its own <span class="caps">OS</span> and emulated &#8216;hardware&#8217;, you mask the differences between all those machines and the software installed on&nbsp;them.</p>
+<p>Who cares if Alice has Mountain Lion on a MacBook Air, and Bob has Lucid Lynx on a water-cooled tower <span class="caps">PC</span> with a Cylon-themed case mod? When they&#8217;re building code and running tests, they&#8217;re both using the exact same version of Debian that their server farm uses. So the scope for incompatibilities is hugely reduced. But Alice and Bob still get to use the same text editors, IDEs and other dev tools they rely on &mdash; their VMs augment the capabilities of their original OSes, but don&#8217;t replace them. This is not really a new idea, but end-user virtualization tools like <a href="http://www.vagrantup.com/">Vagrant</a> and automation frameworks such as <a href="http://www.saltstack.com/community/">Salt</a> have made it much&nbsp;easier.</p>
+<h4>The science&nbsp;bit</h4>
+<p>My goal with <a href="https://github.com/andrewclegg/snake-charmer">Snake Charmer</a> is to provide the same hassle-free experience to scientists, engineers, statisticians and data miners. Any two VMs built from the same Snake Charmer config should behave exactly the same, even if they&#8217;re on a completely different hardware or <span class="caps">OS</span> platform. And installation needs to be as smooth as possible. When you run Snake Charmer, it does the following, <em>entirely unsupervised</em>, through the mechanisms provided by Vagrant and&nbsp;Salt:</p>
+<ul>
+<li>
+<p>Downloads a <span class="caps">VM</span> image for a specific version of&nbsp;Ubuntu</p>
+</li>
+<li>
+<p>Boots this up in <a href="https://www.virtualbox.org/">VirtualBox</a></p>
+</li>
+<li>
+<p>Installs a precise versioned set of Ubuntu packages, including Python&nbsp;3.4</p>
+</li>
+<li>
+<p>Installs an equally exact list of Python packages, patching them where necessary so they play well&nbsp;together</p>
+</li>
+<li>
+<p>Starts up an IPython Notebook server on the <span class="caps">VM</span>, and gives you its <span class="caps">URL</span></p>
+</li>
+</ul>
+<p>The packages installed include NumPy, SciPy, Pandas, IPython, Matplotlib, Seaborn, scikit-learn, PyMC, statsmodels, PyTables, SymPy, Numexpr, Theano, <span class="caps">DEAP</span>, gensim, <span class="caps">NLTK</span>, Beautiful Soup, Cython, Numba <a href="https://github.com/andrewclegg/snake-charmer/blob/master/README.md#what-is-included">and more</a>. And it even comes bundled with R and Octave, and connectors to plug these into IPython &mdash; on the slim chance you find something that you really can&#8217;t do in&nbsp;Python.</p>
+<p>Of course, since it&#8217;s just a standard Ubuntu box running standard Python, you can install whatever other packages you need, from the <a href="https://pypi.python.org/pypi">Python package index</a>, the <a href="http://packages.ubuntu.com/">Ubuntu repositories</a> or elsewhere. And if there&#8217;s a package that you need all the time, you can just add it to Snake Charmer&#8217;s config files so that it gets installed automatically any time you need to build a fresh <span class="caps">VM</span>. But that&#8217;s just the tip of the iceberg. The fact that these are complete virtual machines, not just software packages, brings all kinds of added&nbsp;benefits.</p>
+<h4>Big fish, little fish, virtual&nbsp;box</h4>
+<p>Here are some of the useful things you can do with VMs, either via Vagrant commands, or through VirtualBox&#8217;s admin&nbsp;app.</p>
+<p><strong>Disposability.</strong> Normally, you wouldn&#8217;t store data or code <em>within</em> the <span class="caps">VM</span>, you would use it to run notebooks and read data files from your physical computer. This means if you mess up your <span class="caps">VM</span> somehow, you can just delete it and create a new, identical one. Think of them as disposable commodities that aren&#8217;t even worth&nbsp;fixing.</p>
+<p><strong>Snapshots and rollbacks.</strong> On the other hand, you might want to make some persistent changes to a <span class="caps">VM</span>, like trying out a new package, or a new version of a library. You can take a <em>snapshot</em> of a whole <span class="caps">VM</span> before making a change or taking an action, and if necessary, undo it by rolling back the whole <span class="caps">VM</span> to the snapshot. You could also use this feature to save the state of the <span class="caps">VM</span> at intermediate points along an analysis pipeline. It&#8217;s also a good idea to make a snapshot after you first create a fresh <span class="caps">VM</span>, as rolling back is much quicker than installing a new one from&nbsp;scratch.</p>
+<p>This process can be managed via a <a href="https://github.com/dergachev/vagrant-vbox-snapshot">Vagrant plugin</a> or through <a href="http://www.howtogeek.com/150258/how-to-save-time-by-using-snapshots-in-virtualbox/">VirtualBox itself</a>.</p>
+<p><strong>Shareability.</strong> You can bundle up your <span class="caps">VM</span> into a <a href="https://docs.vagrantup.com/v2/cli/package.html">redistributable package</a>, including any changes you&#8217;ve made to it, and then send it to your colleagues, or make it available for download. Plus you can include data, notebooks and scripts within the package, meaning your entire workflow can be replicated. I believe this has lots of potential in education and in scientific publishing, beyond the more obvious uses in academic and commercial R&amp;D&nbsp;environments.</p>
+<p><strong>Collaboration.</strong> Using <a href="https://vagrantcloud.com/">Vagrant Cloud</a>, you can easily let remote users <a href="http://docs.vagrantup.com/v2/share/index.html">connect to your VMs</a> over the internet &mdash; either securely authenticated individuals, or anyone with the <span class="caps">URL</span>. This is a natural extension of <a href="http://penandpants.com/2013/05/08/broadcasting-ipython-notebooks/">IPython&#8217;s broadcasting features</a>, and could be used for collaborative working, running demos, presenting results, or teaching. In general, it won&#8217;t be affected by firewalls, broadband <span class="caps">NAT</span>&nbsp;etc.</p>
+<p><strong>Resource management.</strong> You can put <a href="https://github.com/andrewclegg/snake-charmer/blob/master/CUSTOMIZING.md#environment-variables">hard limits</a> on the amount of memory, <span class="caps">CPU</span> and storage space a <span class="caps">VM</span> can consume, so a runaway process can&#8217;t crash your whole computer. (We&#8217;ve all been there&#8230;) And you can <a href="https://docs.vagrantup.com/v2/cli/suspend.html">suspend</a> a running <span class="caps">VM</span>, freeing up all the resources it&#8217;s using, even if it&#8217;s in the middle of a long-running task &mdash; then <a href="https://docs.vagrantup.com/v2/cli/resume.html">resume</a> where you left off&nbsp;later.</p>
+<p><strong>Elasticity.</strong> If your resource limits are too tight, for example there&#8217;s not enough <span class="caps">RAM</span> to build a model in, you can extend them any time. If there&#8217;s not enough <em>physical</em> <span class="caps">RAM</span>, <span class="caps">CPU</span> or disk space in your computer, you can move the entire <span class="caps">VM</span> to a server &mdash; or simply create a new, identical one there. With a bit of extra work you can even host a Snake Charmer <span class="caps">VM</span> on cloud services like <a href="https://github.com/mitchellh/vagrant-aws">Amazon <span class="caps">EC2</span></a> and professional virtualization platforms like <a href="http://docs.vagrantup.com/v2/vmware/index.html">VMWare</a>. And you could even create an <a href="http://ipython.org/ipython-doc/stable/parallel/parallel_intro.html">IPython cluster</a> of identical VMs for parallel&nbsp;processing.</p>
+<h4>What&nbsp;next?</h4>
+<p>It&#8217;s still early days for Snake Charmer, which currently provides one version of Python (3.4) on one version of Ubuntu (12.04), and installs over 25 data science packages. I want to keep adding new packages on a regular basis, and stay reasonably up-to-date with new versions of Python and Ubuntu. I plan to create a Python 2.7 build too. At some point in the future it might be possible for me to host pre-built <span class="caps">VM</span> images for download, but that would need a sponsor, as I want to keep it entirely&nbsp;free.</p>
+<p>To get started, <a href="https://github.com/andrewclegg/snake-charmer">clone the git repository</a>, and follow the steps in the <a href="https://github.com/andrewclegg/snake-charmer/blob/master/README.md"><span class="caps">README</span></a>. All you really need to do is install VirtualBox and Vagrant, and run one command. Please let me know how you get on, either here or <a href="https://twitter.com/andrew_clegg">on Twitter</a>.</p>
+<p><em>Note: A previous version of this post talked about &#8216;official releases&#8217; but I&#8217;ve since decided not to do numbered releases. The reason being, it gives a false sense of permanence. A third-party package listed in a numbered release can still <a href="https://github.com/andrewclegg/snake-charmer/commit/83932610d1f04486351094de2e2ddcc292d64e93">disappear from a repo</a> which will break a numbered release. It&#8217;s probably better just to ensure that master at any point in time is a valid build. Happy to hear any alternative ideas you might&nbsp;have&#8230;</em></p>
+  </div>
+  <div id="article_meta">
+    <p>Category: <a href="../tech/index.html">tech</a></p>
+    <p>Tags:
+      <a href="../tag/snake-charmer.html">snake charmer</a>,      <a href="../tag/vagrant.html">vagrant</a>,      <a href="../tag/salt.html">salt</a>,      <a href="../tag/virtualbox.html">virtualbox</a>,      <a href="../tag/virtualization.html">virtualization</a>,      <a href="../tag/python.html">python</a>    </p>
+    <p>&nbsp;</p>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'thepluralofanecdote'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</article>
+
+    <footer>
+<p><a href="../" class="button_accent">&larr; Back to Index</a></p>
+    </footer>
+
+    <div id="ending_message">
+      <p>All content (cc) Andrew Clegg, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+      <p>Built using <a href="http://getpelican.com">Pelican</a> on <a href="http://python.org">Python</a>. Theme based on <a href="https://github.com/giulivo/pelican-svbhack">svbhack</a> by Giulio Fidente.</p>
+    </div>
+  </main>
+</body>
+</html>

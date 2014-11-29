@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet/less" type="text/css" href="../theme/css/style.less">
+  <script src="../theme/js/less-1.3.3.min.js" type="text/javascript"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="../theme/css/style.css"> -->
+
+  <link rel="stylesheet" type="text/css" href="../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Andrew Clegg">
+  <meta name="description" content="Posts and writings by Andrew Clegg">
+
+  <link href="http://www.nervechannel.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Plural of Anecdote Full Atom Feed" />
+
+<meta name="keywords" content="music, lyrics, lastfm, IR, visualization">
+
+  <title>
+Lyric clouds, genre maps and distinctive&nbsp;words  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="..">
+        <img src="/theme/images/logo.jpg" alt="logo">
+      </a>
+      <h2><a href="..">Andrew Clegg</a></h2>
+      <p>The Plural of Anecdote</p>
+      <ul>
+        <li><a href="../About.html">About</a></li>
+        <li><a href="../Publications.html">Publications</a></li>
+        <li><a href="../Talks.html">Talks and&nbsp;workshops</a></li>
+        <li><a href="/">Blog</a></li>
+        <li><a href="https://github.com/andrewclegg/snake-charmer">Snake Charmer</a></li>
+        <li><a href="https://github.com/andrewclegg">GitHub</a></li>
+        <li><a href="https://twitter.com/andrew_clegg">Twitter</a></li>
+        <li><a href="https://www.linkedin.com/in/andrewcleggdatascientist">LinkedIn</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+<p>Posted on Wed 04 June 2014</p>
+    </header>
+
+<article>
+  <div id="article_title">
+    <h3><a href="../data/LyricClouds.html">Lyric clouds, genre maps and distinctive&nbsp;words</a></h3>
+  </div>
+  <div id="article_text">
+    <p><em>This is a repost of an <a href="http://blog.last.fm/2011/06/22/lyric-clouds-genre-maps-and-distinctive-words">article</a> I wrote for the Last.fm blog while working there in 2011. The images disappeared from Last.fm so I&#8217;m serving them out of the wonderful <a href="http://web.archive.org">Internet Archive</a>.</em></p>
+<p>One of the interesting things that sets even superficially similiar genres of music apart is their lyrical content. Last.fm tags can overlap to a great degree, but we were interested to see what the words can tell you about the subtler shades of meaning that go along with those tags. As usual around here, the best way to answer questions like these is by asking the&nbsp;data.</p>
+<p>So I downloaded the <a href="http://labrosa.ee.columbia.edu/millionsong/musixmatch">musiXmatch dataset</a>, a collection of lyric tables for nearly 240,000 songs from all around the world (and the musical universe). They are tables in the sense that they don&#8217;t contain the intact lyrics of each song, but rather a list of words present in each song, along with the number of times that word occurs. No use for karaoke, but perfect for investigating the overall properties of a genre. I then matched up the songs in the dataset with tracks in our own catalogue, and correlated this with Last.fm tag data, in order to count the number of times a given word appeared in each of several prominent&nbsp;genres.</p>
+<h4>Lyric&nbsp;clouds</h4>
+<p>Of course, lists of words and frequencies are a little dry, but thankfully <span class="caps">IBM</span> have released a <a href="http://www.alphaworks.ibm.com/tech/wordcloud">Word-Cloud Generator</a> which can take a weighted list of words and display it graphically, as seen on the <a href="http://www.wordle.net/">Wordle</a> website. The more often a word appears, the bigger it will be rendered. Here&#8217;s what it came up with for the genres I tried — the software did the layout, but you can blame me for the font&nbsp;selection.</p>
+<p><br/>
+<table>
+    <tbody><tr>
+        <td align="center" valign="middle" width="200">
+            <i>Click to open full images in a new window.<br><br>
+                <b>Warning: they contain lyrics you may find offensive. Not safe for work.</b></i>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/blues.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/blues_thumb.png"><br>
+Blues
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/country.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/country_thumb.png"><br>
+Country
+            </a>
+        </td>
+    </tr>
+    <tr><td colspan="3">&nbsp;</td></tr>
+    <tr>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/electronic.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/electronic_thumb.png"><br>
+Electronic
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/folk.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/folk_thumb.png"><br>
+Folk
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/goth.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/goth_thumb.png"><br>
+Goth
+            </a>
+        </td>
+    </tr>
+    <tr><td colspan="3">&nbsp;</td></tr>
+    <tr>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/hip-hop.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/hip-hop_thumb.png"><br>
+Hip-hop
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/indie.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/indie_thumb.png"><br>
+Indie
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/metal.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/metal_thumb.png"><br>
+Metal
+            </a>
+        </td>
+    </tr>
+    <tr><td colspan="3">&nbsp;</td></tr>
+    <tr>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/rap.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/rap_thumb.png"><br>
+Rap
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/rock.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/rock_thumb.png"><br>
+Rock
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/1/soul.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/1/soul_thumb.png"><br>
+Soul
+            </a>
+        </td>
+    </tr>
+</tbody></table>
+<br/></p>
+<p>I did a bit of pre-processing to remove common &#8216;stopwords&#8217; that don&#8217;t really hold any information about the topics of the lyrics (and, for, I, you, the, plus many more), but this only took into account English words — and if you look closely, you&#8217;ll see a few common words from German, French and Spanish (and probably others) that are from foreign-language songs in the dataset. But what&#8217;s most striking for me about these is not how much they differ, but in fact how often some of the words appear prominently across genres. Almost everyone sings about love, for example, with the exception of Rap and Hip-Hop, and time comes up… time and time&nbsp;again.</p>
+<h4>Genre&nbsp;maps</h4>
+<p>A limitation of word clouds is that while they&#8217;re great for showing the comparative popularity of words within a genre, they&#8217;re not so good for looking at the overall similarities or differences of several genres at once. To do that, you need some measure of similarity which can be rendered graphically as a kind of &#8216;genre neighbourhood map&#8217;. So I measured the similarities between the word lists for each genre, ranked by popularity, using <a href="http://blog.codalism.com/?p=1317">a method</a> which was developed to compare the result rankings from different search engines. This gives a single value for how similar the lyric choices are between each pair of genres, where differences towards the top of the lists (the most popular words) are considered more important than differences further down. A bit of <a href="http://www.statmethods.net/advstats/mds.html">extra number crunching</a> in <a href="http://www.r-project.org/">R</a> can convert these similarity scores into a 2D map, which I imported into <a href="http://www.openoffice.org/">OpenOffice</a> to&nbsp;render:</p>
+<p><a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/lyric_map.png" target="wordle"><br>
+<img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/lyric_map_small.png"><br>
+</a></p>
+<p><em>Click image to open larger version in a new&nbsp;window.</em></p>
+<p>This map is really interesting for its combination of expected and unexpected neighbours, and also for the way it clearly shows Rap and Hip-Hop as outliers from the main axis on the left. Goth and Metal, which may appear similar to the un-trained ear (and eye!), are considerably separated, while Metal and Folk are — surprisingly — much closer. Electronic (a very broad tag) is clustered together with Soul and Blues, presumably because of the soulful origins of house music, which is one of the more lyrical electronic sub-genres. And Rap and Hip-Hop, which might be considered synonymous by the layman, are about as different as Indie and Country in terms of lyric&nbsp;ranking.</p>
+<h4>Distinctive&nbsp;words</h4>
+<p>The word clouds as shown draw the viewer&#8217;s attention to the very frequent words, but these also tend to be the ones like love and time which are popular across genres. This is a problem if you want to find out which words are most distinctive or characteristic of a given genre — the words which, if used as search terms for example, would be best at selecting songs from that genre correctly (true positives), while minimizing the number of songs retrieved from other genres (false positives). Once again, information retrieval (the science behind search engines) can help us — the F measure or <a href="http://en.wikipedia.org/wiki/F-score">F score</a> is specifically designed for measuring the tradeoff between true positives and false positives in a set of results. It&#8217;s a score between 0 and 1, where 0 means &#8220;no relevant documents retrieved&#8221;, but 1 means &#8220;all relevant documents retrieved&#8221; and &#8220;no additional spurious documents&nbsp;retrieved&#8221;.</p>
+<p>So I calculated the F score that each word would have as a search term for each genre in some notional lyric-based search engine: &#8220;how relevant would the results be if I searched for Indie tracks with the search term friend&#8221; for example. This doesn&#8217;t take into account the number of times each word occurs within a song, just the fact that it occurs at all, but it does let us redraw the lyric clouds with each word&#8217;s size determined by its F score for that genre. As you can see, this brings out the words that are characteristic of each genre, rather than emphasizing those that are globally&nbsp;popular:</p>
+<p><br/>
+<table>
+    <tbody><tr>
+        <td align="center" valign="middle" width="200">
+            <i>Click to open full images in a new window.<br><br>
+                <b>Warning: they contain lyrics you may find offensive. Not safe for work.</b></i>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/blues.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/blues_thumb.png"><br>
+Blues
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/country.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/country_thumb.png"><br>
+Country
+            </a>
+        </td>
+    </tr>
+    <tr><td colspan="3">&nbsp;</td></tr>
+    <tr>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/electronic.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/electronic_thumb.png"><br>
+Electronic
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/folk.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/folk_thumb.png"><br>
+Folk
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/goth.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/goth_thumb.png"><br>
+Goth
+            </a>
+        </td>
+    </tr>
+    <tr><td colspan="3">&nbsp;</td></tr>
+    <tr>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/hip-hop.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/hip-hop_thumb.png"><br>
+Hip-hop
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/indie.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/indie_thumb.png"><br>
+Indie
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/metal.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/metal_thumb.png"><br>
+Metal
+            </a>
+        </td>
+    </tr>
+    <tr><td colspan="3">&nbsp;</td></tr>
+    <tr>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/rap.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/rap_thumb.png"><br>
+Rap
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/rock.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/rock_thumb.png"><br>
+Rock
+            </a>
+        </td>
+        <td align="center" valign="middle" width="200">
+            <a href="http://web.archive.org/web/20120107121411/http://users.last.fm/~andy/lyric_clouds/2/soul.png" target="wordle">
+                <img src="http://web.archive.org/web/20120107121411im_/http://users.last.fm/~andy/lyric_clouds/2/soul_thumb.png"><br>
+Soul
+            </a>
+        </td>
+    </tr>
+</tbody></table>
+<br/></p>
+<p>I think they bring out the unique character of each genre much more effectively, and the variation in size between the words is much less, so the less prominent words are easier to see. There are some interesting quirks visible too. For example, many German words are much more clearly visible in the Goth cloud than they were before, reflecting both the comparatively large number of songs in German in that genre, and the lack of German lyrics in most other genres. Country for example is entirely&nbsp;English.</p>
+<p>Finally, a little extra present from the data. The word with the highest F score in the whole dataset is Christmas, with an F score of 0.3892 for the tag… Christmas. So, unseasonal greetings from the data crunchers here at Last.<span class="caps">HQ</span>!</p>
+<p><em>Thanks to <a href="http://musixmatch.com/">musiXmatch</a> for making the lyric database available, and <a href="http://www.columbia.edu/~tb2332/">Thierry Bertin-Mahieux</a> for helping me to reconstruct the full words from the stems in the&nbsp;database.</em></p>
+  </div>
+  <div id="article_meta">
+    <p>Category: <a href="../data/index.html">data</a></p>
+    <p>Tags:
+      <a href="../tag/music.html">music</a>,      <a href="../tag/lyrics.html">lyrics</a>,      <a href="../tag/lastfm.html">lastfm</a>,      <a href="../tag/ir.html">IR</a>,      <a href="../tag/visualization.html">visualization</a>    </p>
+    <p>&nbsp;</p>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'thepluralofanecdote'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</article>
+
+    <footer>
+<p><a href="../" class="button_accent">&larr; Back to Index</a></p>
+    </footer>
+
+    <div id="ending_message">
+      <p>All content (cc) Andrew Clegg, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+      <p>Built using <a href="http://getpelican.com">Pelican</a> on <a href="http://python.org">Python</a>. Theme based on <a href="https://github.com/giulivo/pelican-svbhack">svbhack</a> by Giulio Fidente.</p>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet/less" type="text/css" href="../theme/css/style.less">
+  <script src="../theme/js/less-1.3.3.min.js" type="text/javascript"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="../theme/css/style.css"> -->
+
+  <link rel="stylesheet" type="text/css" href="../theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Andrew Clegg">
+  <meta name="description" content="Posts and writings by Andrew Clegg">
+
+  <link href="http://www.andrewclegg.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="The Plural of Anecdote Full Atom Feed" />
+
+<meta name="keywords" content="interviews, data science">
+
+  <title>
+Interview with a Data&nbsp;Scientist  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="..">
+        <img src="/theme/images/logo.jpg" alt="logo">
+      </a>
+      <h2><a href="..">Andrew Clegg</a></h2>
+      <p>The Plural of Anecdote</p>
+      <ul>
+        <li><a href="../About.html">About</a></li>
+        <li><a href="../Publications.html">Publications</a></li>
+        <li><a href="../Talks.html">Talks and&nbsp;workshops</a></li>
+        <li><a href="/">Blog</a></li>
+        <li><a href="https://github.com/andrewclegg/snake-charmer">Snake Charmer</a></li>
+        <li><a href="https://github.com/andrewclegg">GitHub</a></li>
+        <li><a href="https://twitter.com/andrew_clegg">Twitter</a></li>
+        <li><a href="https://www.linkedin.com/in/andrewcleggdatascientist">LinkedIn</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+<p>Posted on Sat 06 June 2015</p>
+    </header>
+
+<article>
+  <div id="article_title">
+    <h3><a href="../news/PeadarCoyleInterview.html">Interview with a Data&nbsp;Scientist</a></h3>
+  </div>
+  <div id="article_text">
+    <p><em>I was recently interviewed by Peadar Coyle for his data science blog, <a href="https://peadarcoyle.wordpress.com/">Models are Illuminating and Wrong</a>, as the latest in a series of features on people in the field. It&#8217;s archived here for posterity, but I would recommend taking a look at the <a href="https://peadarcoyle.wordpress.com/2015/05/14/interviews-with-data-scientists-the-collection/">whole collection</a>.</em></p>
+<p><strong>1. What project have you worked on do you wish you could go back to, and do&nbsp;better?</strong></p>
+<p>The one that most springs to mind was an analytics and visualization platform called Palomino that my team at Pearson built: a custom <span class="caps">JS</span>/<span class="caps">HTML5</span> app on top of Elasticsearch, Hadoop and HBase, plus a bunch of other pipeline components, some open source and some in-house. It kind of worked, and we learnt a lot, but it was buggy, flaky at the scale we tried to push it to, and reliant on constant supervision. And it&#8217;s no longer in use, mostly for those&nbsp;reasons.</p>
+<p>It was pretty ambitious to begin with, but I got dazzled by shiny new toys and the lure of realtime intelligence, and brought in too many new bits of tech that there was no organisational support for. We discovered that distributed data stores and message queues are <em>never</em> as robust as they claim (c.f. <a href="https://aphyr.com/tags/jepsen">Jepsen</a>); that most people don&#8217;t really need realtime interactive analytics; and that supporting complex clustered applications (even internal ones) is really hard, especially in an organisation that doesn&#8217;t really have a devops&nbsp;culture.</p>
+<p>These days, I&#8217;d try very hard to find a solution using existing tools &#8212; <a href="https://www.elastic.co/products/kibana">Kibana</a> for example looks much more mature and powerful than it did when we started out, and has a whole community and coherent ecosystem around it. And I&#8217;d definitely shoot for a much simpler architecture with fewer moving parts and unfamiliar components. Dan McKinley&#8217;s article <a href="http://mcfunley.com/choose-boring-technology">Choose Boring Technology</a> is very relevant&nbsp;here.</p>
+<p><strong>2. What advice do you have to younger analytics professionals and in particular PhD students in the&nbsp;Sciences?</strong></p>
+<p>I was asked this the other day by a recent PhD grad who was interested in a data science career, so I&#8217;ll pass on what I told&nbsp;him.</p>
+<p>I think there are broadly three kinds of work that take place under the general heading of &#8220;data scientist&#8221;, although, there are also plenty of exceptions to&nbsp;this.</p>
+<p>The first is about turning data into business insight, via statistical modelling, forecasting, predictive analytics, customer segmentation and clustering, survival analysis, churn prediction, visualization, online experiment design, and selection or design of meaningful metrics and&nbsp;KPIs.</p>
+<p>The second is about developing data-driven products and features for the web, e.g. recommendation engines, trend detectors, anomaly detectors, search and ranking engines, ad placement algorithms, spam and abuse classifiers, content fingerprinting and similarity scoring,&nbsp;etc.</p>
+<p>The third is really a more modern take on what used to be called operational research, i.e. optimizing business processes algorithmically to reduce time or cost, or increase coverage or reported&nbsp;satisfaction.</p>
+<p>In many companies these will be separate roles, and not all companies do all three. But you&#8217;ll also see roles that involve two or occasionally all three of these, in varying proportions. I guess a good start is to think about which appeals to you the most, and that will help guide&nbsp;you.</p>
+<p>Don&#8217;t get confused by the nomenclature: &#8220;data scientist&#8221; could mean any of those things, or something else entirely that&#8217;s been rebranded to look cool. And you could be doing any of those things and not be called a data scientist. Read the job specs closely and ask lots of&nbsp;questions.</p>
+<p><strong>3. What do you wish you knew earlier about being a data&nbsp;scientist?</strong></p>
+<p>Well, I wish I&#8217;d taken double maths for A level, all those years ago! As it was, I took the single option, and chose the mechanics module over statistics, something that held me back ever since despite various post-graduate courses. There are certain things that are just harder to crowbar into an adult brain, if you don&#8217;t internalize the concepts early enough. I think languages and music are in that category&nbsp;too.</p>
+<p>(For our global readers: A-levels are the qualifications from the last two years of high school. You usually do three or four subjects, or at least you did in my day. You could do standard maths with mechanics or stats, or standard + further with both, which counted as two&nbsp;qualifications.)</p>
+<p>I had a similar experience with biology &#8212; I dropped it when I was 16 but ended up working in bioinformatics for several years. Statistics and biology are both subjects that are much more interesting than school makes them seem, and I wish I&#8217;d known that at the&nbsp;time.</p>
+<p><strong>4. How do you respond when you hear the phrase &#8216;big&nbsp;data&#8217;?</strong></p>
+<p>Well, I used to react with anger and contempt, and have given some <a href="https://drive.google.com/file/d/0B1HztRme3ZjZZjA1WHFJY25lQnM/view">pretty opinionated talks</a> on that subject before. It&#8217;s one of those things you can&#8217;t get away from in the enterprise <span class="caps">IT</span> world, but ironically, since I joined Etsy I&#8217;ve been numbed to the phrase by over-exposure&#8230; Just because the Github repo for our Scalding and Cascading code is called&nbsp;&#8220;BigData&#8221;.</p>
+<p>It&#8217;s a marketing term with very little information content &#8212; rather like &#8220;cloud&#8221;. But unlike &#8220;cloud&#8221; I actually think it&#8217;s actively misleading &#8212; it focuses attention on the size aspect, when most organisations have interesting and potentially valuable datasets that can fit on a laptop, or at least a medium-sized server. For that matter, a server with a <em>terabyte</em> of <span class="caps">RAM</span> isn&#8217;t much over $20K these days. &#8220;Big data&#8221; makes <span class="caps">IT</span> departments go all weak-kneed with delight or terror at the prospect of getting a Hadoop (or Spark) cluster, even though that&#8217;s often not the right fit at&nbsp;all.</p>
+<p>And as a noun phrase, it sucks, as it really doesn&#8217;t refer to anything. You can&#8217;t say &#8220;we solved this problem with big data&#8221; as big data isn&#8217;t really a thing with any consistent&nbsp;definition.</p>
+<p><strong>5. What is the most exciting thing about your&nbsp;field?</strong></p>
+<p>That&#8217;s an interesting one. Deep learning is huge right now, but part of me still suspects it&#8217;s a passing fad, partly because I&#8217;m old enough to remember when plain-old neural networks were at the same stage of the hype cycle. Then they fell by the wayside for years. That said, the concrete improvements shown by convolutional nets on image recognition tasks are pretty&nbsp;impressive.</p>
+<p>Time will tell whether that feat can be replicated in other domains. Recent work on <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">recurrent nets for modelling sequences</a> (text, music, etc.) is interesting, and there&#8217;s been some fascinating work from Google (and their acquihires DeepMind) on learning to <a href="http://arxiv.org/abs/1312.5602">play video games</a> or <a href="http://arxiv.org/abs/1410.4615">parse and execute code</a>. These last two examples both combine deep learning with non-standard training methods (reinforcement learning and curriculum learning respectively), and my money&#8217;s on this being the direction that will really shake things up. But I&#8217;m a layman as far as this stuff&nbsp;goes.</p>
+<p>One problem with neural architectures is that they&#8217;re often black boxes, or at least pretty dark grey &#8212; hard to interpret or gain much insight from. There are still a lot of huge domains where this is a hard sell, education and healthcare being good examples. Maybe someone will invent a learning method with the transparency of decision trees but the power of deep nets, and win over those people in jobs where &#8220;just trust the machine&#8221; doesn&#8217;t&nbsp;work.</p>
+<p><strong>6. How do you go about framing a data problem - in particular, how do you avoid spending too long, how do you manage expectations etc. How do you know what is good&nbsp;enough?</strong></p>
+<p>It took me a long time to realise this, but short release cycles with small iterative improvements are the way to go. <em>Any</em> result that shows an improvement over your current baseline is a result &#8212; so even if you think there are much bigger wins to be had, get it into production, and test it on real data, while you work on its replacement. (Or if you&#8217;re in academia, get a quick workshop paper out while you work on its&nbsp;replacement!)</p>
+<p>This is also a great way to avoid overfitting, especially if you are in industry, or a service-driven academic field like bioinformatics. Instead of constantly bashing away at the error rate on a well-worn standard test set, get some new data from actual users (or cultures or sensors or whatever) and see if your model holds up in real life. And make sure you&#8217;re optimizing for the right thing &#8212; i.e. that your evaluation metrics really reflect the true cost of a&nbsp;misprediction.</p>
+<p>I worked in natural language processing for quite a while, and I&#8217;m sure that field was held back for a while by collective, cultural overfitting to the same-old datasets, like Penn Treebank section 23. There&#8217;s an <a href="http://hunch.net/?p=22">old John Langford article</a> about this and other non-obvious ways to overfit, which is always worth a&nbsp;re-read.</p>
+<p><em><a href="https://peadarcoyle.wordpress.com/2015/06/06/interview-with-a-data-scientist-andrew-clegg/">Original version at Peadar&#8217;s&nbsp;blog</a></em></p>
+  </div>
+  <div id="article_meta">
+    <p>Category: <a href="../news/index.html">news</a></p>
+    <p>Tags:
+      <a href="../tag/interviews.html">interviews</a>,      <a href="../tag/data-science.html">data science</a>    </p>
+    <p>&nbsp;</p>
+    <!--
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'thepluralofanecdote'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+  -->
+</article>
+
+    <footer>
+<p><a href="../" class="button_accent">&larr; Back to Index</a></p>
+    </footer>
+
+    <div id="ending_message">
+      <p>All content (cc) Andrew Clegg, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+      <p>Built using <a href="http://getpelican.com">Pelican</a> on <a href="http://python.org">Python</a>. Theme based on <a href="https://github.com/giulivo/pelican-svbhack">svbhack</a> by Giulio Fidente.</p>
+      <p><strong>No comments?</strong> I'm no longer sure comments are relevant. I'd rather you replied on <a href="https://twitter.com/andrew_clegg">Twitter</a>, or wrote a response on your own blog or a site like <a href="https://medium.com/">Medium</a>.</p>
+    </div>
+  </main>
+</body>
+</html>

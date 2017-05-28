@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>The Plural of Anecdote</title><link href="http://www.andrewclegg.org/" rel="alternate"></link><link href="http://www.andrewclegg.org/feeds/all.atom.xml" rel="self"></link><id>http://www.andrewclegg.org/</id><updated>2017-05-28T00:00:00+01:00</updated><entry><title>Optimizing TensorFlow for your laptop’s CPU</title><link href="http://www.andrewclegg.org/tech/TensorFlowLaptopCPU.html" rel="alternate"></link><updated>2017-05-28T00:00:00+01:00</updated><author><name>Andrew Clegg</name></author><id>tag:www.andrewclegg.org,2017-05-28:tech/TensorFlowLaptopCPU.html</id><summary type="html">&lt;p&gt;I&amp;#8217;ve recently been teaching myself &lt;a href="https://www.tensorflow.org"&gt;TensorFlow&lt;/a&gt;, and haven&amp;#8217;t spent the time and money to set up a cloud server (or physical machine!) with a &lt;span class="caps"&gt;GPU&lt;/span&gt;. I was originally running it from a pre-built Docker image, inside a Jupyter notebook, and saw a bunch of warnings like this in the console&amp;nbsp;output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t compiled to use SSE3 instructions, but
-these are available on your machine and could speed up CPU computations.
-W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t compiled to use SSE4.1 instructions, but
-these are available on your machine and could speed up CPU computations.
-W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t compiled to use SSE4.2 instructions, but
-these are available on your machine and could speed up CPU computations.
-W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t compiled to use AVX instructions, but
-these are available on your machine and could speed up CPU computations.
-W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t compiled to use AVX2 instructions, but
-these are available on your machine and could speed up CPU computations.
-W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t compiled to use FMA instructions, but
-these are available on your machine and could speed up CPU computations.
+&lt;div class="highlight"&gt;&lt;pre&gt;W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t
+compiled to use SSE3 instructions, but these are available on your machine and
+could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t
+compiled to use SSE4.1 instructions, but these are available on your machine and
+could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t
+compiled to use SSE4.2 instructions, but these are available on your machine and
+could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t
+compiled to use AVX instructions, but these are available on your machine and
+could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t
+compiled to use AVX2 instructions, but these are available on your machine and
+could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&amp;#39;t
+compiled to use FMA instructions, but these are available on your machine and
+could speed up CPU computations.
 &lt;/pre&gt;&lt;/div&gt;
 
 

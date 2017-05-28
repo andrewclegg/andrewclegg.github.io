@@ -55,12 +55,12 @@ Optimizing TensorFlow for your laptop&#8217;s <span class="caps">CPU</span>  </t
   </div>
   <div id="article_text">
     <p>I&#8217;ve recently been teaching myself <a href="https://www.tensorflow.org">TensorFlow</a>, and haven&#8217;t spent the time and money to set up a cloud server (or physical machine!) with a <span class="caps">GPU</span>. I was originally running it from a pre-built Docker image, inside a Jupyter notebook, and saw a bunch of warnings like this in the console&nbsp;output:</p>
-<div class="highlight"><pre><span class="n">W</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">cpu_feature_guard</span><span class="p">.</span><span class="n">cc</span><span class="o">:</span><span class="mi">45</span><span class="p">]</span> <span class="n">The</span> <span class="n">TensorFlow</span> <span class="n">library</span> <span class="n">wasn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span> <span class="n">SSE3</span> <span class="n">instructions</span><span class="p">,</span> <span class="n">but</span> <span class="n">these</span> <span class="n">are</span> <span class="n">available</span> <span class="n">on</span> <span class="n">your</span> <span class="n">machine</span> <span class="n">and</span> <span class="n">could</span> <span class="n">speed</span> <span class="n">up</span> <span class="n">CPU</span> <span class="n">computations</span><span class="p">.</span>
-<span class="n">W</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">cpu_feature_guard</span><span class="p">.</span><span class="n">cc</span><span class="o">:</span><span class="mi">45</span><span class="p">]</span> <span class="n">The</span> <span class="n">TensorFlow</span> <span class="n">library</span> <span class="n">wasn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span> <span class="n">SSE4</span><span class="mf">.1</span> <span class="n">instructions</span><span class="p">,</span> <span class="n">but</span> <span class="n">these</span> <span class="n">are</span> <span class="n">available</span> <span class="n">on</span> <span class="n">your</span> <span class="n">machine</span> <span class="n">and</span> <span class="n">could</span> <span class="n">speed</span> <span class="n">up</span> <span class="n">CPU</span> <span class="n">computations</span><span class="p">.</span>
-<span class="n">W</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">cpu_feature_guard</span><span class="p">.</span><span class="n">cc</span><span class="o">:</span><span class="mi">45</span><span class="p">]</span> <span class="n">The</span> <span class="n">TensorFlow</span> <span class="n">library</span> <span class="n">wasn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span> <span class="n">SSE4</span><span class="mf">.2</span> <span class="n">instructions</span><span class="p">,</span> <span class="n">but</span> <span class="n">these</span> <span class="n">are</span> <span class="n">available</span> <span class="n">on</span> <span class="n">your</span> <span class="n">machine</span> <span class="n">and</span> <span class="n">could</span> <span class="n">speed</span> <span class="n">up</span> <span class="n">CPU</span> <span class="n">computations</span><span class="p">.</span>
-<span class="n">W</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">cpu_feature_guard</span><span class="p">.</span><span class="n">cc</span><span class="o">:</span><span class="mi">45</span><span class="p">]</span> <span class="n">The</span> <span class="n">TensorFlow</span> <span class="n">library</span> <span class="n">wasn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span> <span class="n">AVX</span> <span class="n">instructions</span><span class="p">,</span> <span class="n">but</span> <span class="n">these</span> <span class="n">are</span> <span class="n">available</span> <span class="n">on</span> <span class="n">your</span> <span class="n">machine</span> <span class="n">and</span> <span class="n">could</span> <span class="n">speed</span> <span class="n">up</span> <span class="n">CPU</span> <span class="n">computations</span><span class="p">.</span>
-<span class="n">W</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">cpu_feature_guard</span><span class="p">.</span><span class="n">cc</span><span class="o">:</span><span class="mi">45</span><span class="p">]</span> <span class="n">The</span> <span class="n">TensorFlow</span> <span class="n">library</span> <span class="n">wasn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span> <span class="n">AVX2</span> <span class="n">instructions</span><span class="p">,</span> <span class="n">but</span> <span class="n">these</span> <span class="n">are</span> <span class="n">available</span> <span class="n">on</span> <span class="n">your</span> <span class="n">machine</span> <span class="n">and</span> <span class="n">could</span> <span class="n">speed</span> <span class="n">up</span> <span class="n">CPU</span> <span class="n">computations</span><span class="p">.</span>
-<span class="n">W</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">cpu_feature_guard</span><span class="p">.</span><span class="n">cc</span><span class="o">:</span><span class="mi">45</span><span class="p">]</span> <span class="n">The</span> <span class="n">TensorFlow</span> <span class="n">library</span> <span class="n">wasn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">compiled</span> <span class="n">to</span> <span class="n">use</span> <span class="n">FMA</span> <span class="n">instructions</span><span class="p">,</span> <span class="n">but</span> <span class="n">these</span> <span class="n">are</span> <span class="n">available</span> <span class="n">on</span> <span class="n">your</span> <span class="n">machine</span> <span class="n">and</span> <span class="n">could</span> <span class="n">speed</span> <span class="n">up</span> <span class="n">CPU</span> <span class="n">computations</span><span class="p">.</span>
+<div class="highlight"><pre>W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&#39;t compiled to use SSE3 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&#39;t compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&#39;t compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&#39;t compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&#39;t compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn&#39;t compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
 </pre></div>
 
 
@@ -77,49 +77,49 @@ Optimizing TensorFlow for your laptop&#8217;s <span class="caps">CPU</span>  </t
 <p>Bazel also requires <span class="caps">JDK8</span> which you can get from <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Oracle</a>. I used 1.8.0_131 which was the latest at time of writing, but I don&#8217;t think it matters too&nbsp;much.</p>
 <h3>Bazel</h3>
 <p><a href="https://bazel.build">Bazel</a> is Google&#8217;s build tool which is used to compile and package <span class="caps">TF</span>. Once Homebrew and Java are installed &#8212; you may want to log out and log back in again to make sure environment variables etc. are set up right &#8212; you can install Bazel by&nbsp;typing:</p>
-<div class="highlight"><pre><span class="n">brew</span> <span class="n">install</span> <span class="n">bazel</span>
+<div class="highlight"><pre>brew install bazel
 </pre></div>
 
 
 <h3>TensorFlow</h3>
 <p>Finally we can actually install TensorFlow&nbsp;itself.</p>
 <p>I created a Conda environment to work in,&nbsp;first:</p>
-<div class="highlight"><pre><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">tensorflow</span>
-<span class="n">source</span> <span class="n">activate</span> <span class="n">tensorflow</span>
+<div class="highlight"><pre>conda create -n tensorflow
+source activate tensorflow
 </pre></div>
 
 
 <p>Although I think this is a bit moot, as the pip install step (see below) seems to install it into your Conda site-packages and make it available in all environments&nbsp;automatically.</p>
 <p>Then checkout TensorFlow from <a href="https://github.com/tensorflow/tensorflow">GitHub</a> and cd into your local copy,&nbsp;and</p>
-<div class="highlight"><pre><span class="p">.</span><span class="o">/</span><span class="n">configure</span>
+<div class="highlight"><pre>./configure
 </pre></div>
 
 
 <p>to configure the build. You can switch on various optional features here, it&#8217;s probably fine to leave everything as defaults though. The actual options we&#8217;re interested in aren&#8217;t controlled here, but via command line params when you actually build&nbsp;it.</p>
 <p>That&#8217;s done by typing the&nbsp;following:</p>
-<div class="highlight"><pre><span class="n">bazel</span> <span class="n">build</span> <span class="o">-</span><span class="n">c</span> <span class="n">opt</span> <span class="o">--</span><span class="n">copt</span><span class="o">=-</span><span class="n">mavx</span> <span class="o">--</span><span class="n">copt</span><span class="o">=-</span><span class="n">mavx2</span> <span class="o">--</span><span class="n">copt</span><span class="o">=-</span><span class="n">mfma</span> <span class="o">--</span><span class="n">copt</span><span class="o">=-</span><span class="n">msse4</span><span class="mf">.2</span> <span class="o">-</span><span class="n">k</span> <span class="c1">//tensorflow/tools/pip_package:build_pip_package</span>
+<div class="highlight"><pre>bazel build -c opt --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-msse4.2 -k //tensorflow/tools/pip_package:build_pip_package
 </pre></div>
 
 
 <p>This will compile <span class="caps">TF</span> itself, and also output a script to generate a Python package. Be warned, this will take a while! Well over an hour, probably more like two. I didn&#8217;t time it&nbsp;exactly.</p>
 <p>On some platforms you need to add <code>--copt=-mfpmath=both</code> to the set of flags above, but recent versions of clang provided with macOS don&#8217;t need this, and will barf if you&nbsp;do.</p>
 <p>Once it&#8217;s finished, you need to bundle it into a pip wheel &#8212; a binary distribution with a Python&nbsp;wrapper:</p>
-<div class="highlight"><pre><span class="n">bazel</span><span class="o">-</span><span class="n">bin</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">pip_package</span><span class="o">/</span><span class="n">build_pip_package</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">tensorflow_pkg</span>
+<div class="highlight"><pre>bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 </pre></div>
 
 
 <p>Then you can install this into your Conda environment. First, double-check your paths are set up right by typing <code>which pip</code> &#8212; it should be pointing to a version of pip in your anaconda install directory. Then&nbsp;type:</p>
-<div class="highlight"><pre><span class="nx">pip</span> <span class="nb">install</span> <span class="p">/</span><span class="nx">tmp</span><span class="p">/</span><span class="nx">tensorflow_pkg</span><span class="p">/</span><span class="nx">tensorflow</span><span class="o">-&lt;</span><span class="nx">blah</span><span class="o">&gt;</span><span class="bp">.</span><span class="nx">whl</span>
+<div class="highlight"><pre>pip install /tmp/tensorflow_pkg/tensorflow-&lt;blah&gt;.whl
 </pre></div>
 
 
 <p>where <code>&lt;blah&gt;</code> is some long version string. Just tab-complete it &#8212; this should be the only .whl file in that directory&nbsp;anyway.</p>
 <p>Now we can test it works! But before that, and <strong>this is important</strong>, cd out of the tensorflow directory to somewhere completely different, e.g. your home directory. If you don&#8217;t do this, when you try to import the package, Python will try to import it from the local directory and not the installed library, and fail with a cryptic error. This confused me the first&nbsp;time.</p>
 <p>Anyway, to test it&#8217;s installed <span class="caps">OK</span>, run python or ipython,&nbsp;and:</p>
-<div class="highlight"><pre><span class="n">import</span> <span class="n">tensorflow</span> <span class="n">as</span> <span class="n">tf</span>
-<span class="n">hello</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">constant</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Hello</span><span class="p">,</span> <span class="n">TensorFlow</span><span class="o">!</span><span class="err">&#39;</span><span class="p">)</span>
-<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">Session</span><span class="p">()</span>
-<span class="n">print</span><span class="p">(</span><span class="n">sess</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">hello</span><span class="p">))</span>
+<div class="highlight"><pre>import tensorflow as tf
+hello = tf.constant(&#39;Hello, TensorFlow!&#39;)
+sess = tf.Session()
+print(sess.run(hello))
 </pre></div>
 
 
